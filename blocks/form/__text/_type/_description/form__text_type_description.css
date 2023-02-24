@@ -1,0 +1,11 @@
+.form__text_type_description {
+  margin-bottom: 48px;
+}
+
+@media screen and (max-width: 560px) {
+
+  .form__text_type_description {
+    margin-bottom: 45px;
+  }
+
+}

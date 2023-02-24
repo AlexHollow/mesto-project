@@ -9,22 +9,7 @@
 @import url('../blocks/page/__footer/page__footer.css');
 
 
-@import url('../blocks/popup/popup.css');
-@import url('../blocks/popup/_opened/popup_opened.css');
-@import url('../blocks/popup/__background/popup__background.css');
-@import url('../blocks/popup/__container/popup__container.css');
-@import url('../blocks/popup/__close-button/popup__close-button.css');
-@import url('../blocks/popup/__title/popup__title.css');
-
-
-@import url('../blocks/form/form.css');
-@import url('../blocks/form/__name/form__name.css');
-@import url('../blocks/form/__discription/form__discription.css');
-@import url('../blocks/form/__button/form__button.css');
-
-
 @import url('../blocks/header/header.css');
-@import url('../blocks/header/__logo-container/header__logo-container.css');
 @import url('../blocks/header/__logo/header__logo.css');
 
 
@@ -48,10 +33,22 @@
 @import url('../blocks/element/__info/element__info.css');
 @import url('../blocks/element/__title/element__title.css');
 @import url('../blocks/element/__like-button/element__like-button.css');
-@import url('../blocks/element/__like-button/_disabled/element__like-button_disabled.css');
 @import url('../blocks/element/__like-button/_active/element__like-button_active.css');
 
 
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');
 
+
+@import url('../blocks/popup/popup.css');
+@import url('../blocks/popup/_opened/popup_opened.css');
+@import url('../blocks/popup/__container/popup__container.css');
+@import url('../blocks/popup/__close-button/popup__close-button.css');
+@import url('../blocks/popup/__title/popup__title.css');
+
+
+@import url('../blocks/form/form.css');
+@import url('../blocks/form/__text/form__text.css');
+@import url('../blocks/form/__text/_type/_name/form__text_type_name.css');
+@import url('../blocks/form/__text/_type/_description/form__text_type_description.css');
+@import url('../blocks/form/__button/form__button.css');

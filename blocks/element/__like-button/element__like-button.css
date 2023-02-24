@@ -1,11 +1,14 @@
 .element__like-button {
+  padding: 0;
   width: 22px;
   height: 19px;
   border: none;
+  background-image: url('../../../../images/like-disabled.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-color: transparent;
   cursor: pointer;
+  transition: 0.2s linear;
 }
 
 .element__like-button:hover {

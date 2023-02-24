@@ -8,3 +8,16 @@
   height: 100vh;
   z-index: 20;
 }
+
+.popup::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  background-size: cover;
+  opacity: .5;
+  z-index: 25;
+}

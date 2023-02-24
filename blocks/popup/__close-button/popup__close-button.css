@@ -2,6 +2,7 @@
   position: absolute;
   top: calc((-8px) - 32px);
   right: calc((-8px) - 32px);
+  padding: 0;
   min-width: 32px;
   height: 32px;
   border: none;
@@ -11,6 +12,7 @@
   background-size: 100%;
   background-color: transparent;
   cursor: pointer;
+  transition: 0.2s linear;
 }
 
 .popup__close-button:hover {
