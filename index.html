@@ -71,17 +71,37 @@
   <footer class="footer page__footer">
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
-  <div class="popup">
+  <div id="profilePopup" class="popup">
     <div class="popup__container">
       <button type="button" class="popup__close-button"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
-      <form name="profile-edit" action="#" class="form">
-        <input type="text" class="form__text form__text_type_name" name="name" value="Жак-Ив Кусто"   placeholder="Ваше имя">
-        <input type="text" class="form__text form__text_type_description" name="description"  value="Исследователь океана" placeholder="Опишите себя в нескольких словах">
+      <form id="profileForm" name="profile-form" action="#" class="form">
+        <input type="text" class="form__text form__text_type_name" name="name"  placeholder="Ваше имя">
+        <input type="text" class="form__text form__text_type_description" name="description" placeholder="Опишите себя в нескольких словах">
         <input type="submit" value="Сохранить" class="form__button">
       </form>
     </div>
   </div>
+  <div id="cardPopup" class="popup">
+    <div class="popup__container">
+      <button type="button" class="popup__close-button"></button>
+      <h3 class="popup__title">Новое место</h3>
+      <form id="cardForm" name="card-form" action="#" class="form">
+        <input type="text" class="form__text form__text_type_name" name="title" placeholder="Название">
+        <input type="text" class="form__text form__text_type_description" name="link" placeholder="Ссылка на картинку">
+        <input type="submit" value="Создать" class="form__button">
+      </form>
+    </div>
+  </div>
+  <template id="newCard">
+    <li class="element">
+      <img src="" alt="" class="element__image">
+      <div class="element__info">
+        <h2 class="element__title"></h2>
+        <button type="button" class="element__like-button"></button>
+      </div>
+    </li>
+  </template>
   <script src="./index.js"></script>
 </body>
 </html>
