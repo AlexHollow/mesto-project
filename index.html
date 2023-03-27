@@ -23,12 +23,13 @@
     </section>
     <section class="elements content__elements">
       <ul class="elements__list">
-        <li class="element">
+        <!-- <li class="element">
           <img src="./images/karachaevsk-photo.jpg" alt="Фото-Карачаевск" class="element__image">
           <div class="element__info">
             <h2 class="element__title">Карачаевск</h2>
             <button type="button" class="element__like-button"></button>
           </div>
+          <button type="button" class="element__delete-button"></button>
         </li>
         <li class="element">
           <img src="./images/elbrus-photo.jpg" alt="Фота-Эльбрус" class="element__image">
@@ -64,7 +65,7 @@
             <h2 class="element__title">Карачаево-Черкесия</h2>
             <button type="button" class="element__like-button"></button>
           </div>
-        </li>
+        </li> -->
       </ul>
     </section>
   </main>
@@ -76,8 +77,8 @@
       <button type="button" class="popup__close-button"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
       <form id="profileForm" name="profile-form" action="#" class="form">
-        <input type="text" class="form__text form__text_type_name" name="name"  placeholder="Ваше имя">
-        <input type="text" class="form__text form__text_type_description" name="description" placeholder="Опишите себя в нескольких словах">
+        <input type="text" class="form__text form__text_type_name" name="name"  placeholder="Ваше имя" required>
+        <input type="text" class="form__text form__text_type_description" name="description" placeholder="Опишите себя в нескольких словах" required>
         <input type="submit" value="Сохранить" class="form__button">
       </form>
     </div>
@@ -87,8 +88,8 @@
       <button type="button" class="popup__close-button"></button>
       <h3 class="popup__title">Новое место</h3>
       <form id="cardForm" name="card-form" action="#" class="form">
-        <input type="text" class="form__text form__text_type_name" name="title" placeholder="Название">
-        <input type="text" class="form__text form__text_type_description" name="link" placeholder="Ссылка на картинку">
+        <input type="text" class="form__text form__text_type_name" name="title" placeholder="Название" required>
+        <input type="text" class="form__text form__text_type_description" name="link" placeholder="Ссылка на картинку" required>
         <input type="submit" value="Создать" class="form__button">
       </form>
     </div>
@@ -100,6 +101,7 @@
         <h2 class="element__title"></h2>
         <button type="button" class="element__like-button"></button>
       </div>
+      <button type="button" class="element__delete-button"></button>
     </li>
   </template>
   <script src="./index.js"></script>
