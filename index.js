@@ -4,6 +4,10 @@ const profilePopup = document.querySelector('#profilePopup');
 const cardPopup = document.querySelector('#cardPopup');
 //popup с изображением карточки
 const imagePopup = document.querySelector('#imagePopup');
+//Картинка popup'а
+const popupImage = imagePopup.querySelector('.popup__image');
+//Название картинки popup'а
+const popupImageTitle = imagePopup.querySelector('.popup__image-title');
 //Кнопка открытия popup'а редактирования профиля
 const profileBtn = document.querySelector('.profile__edit-button');
 //Кнопка открытия popup'а создания карточки
@@ -73,8 +77,9 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-//Функция добавления карточки
-function addCard(title, link) {
+
+//Функция создания карточки
+function createCard(title, link) {
   const card = cardTemplate.querySelector('.element').cloneNode(true);
 
   card.querySelector('.element__title').textContent = title;
@@ -90,34 +95,40 @@ function addCard(title, link) {
   });
 
   card.querySelector('.element__image').addEventListener('click', (evt) => {
-    imagePopup.querySelector('.popup__image').setAttribute('src', evt.target.getAttribute('src'));
-    imagePopup.querySelector('.popup__image').setAttribute('alt', evt.target.getAttribute('alt'));
-    imagePopup.querySelector('.popup__image-title').textContent = evt.target.getAttribute('alt');
+    popupImage.setAttribute('src', evt.target.getAttribute('src'));
+    popupImage.setAttribute('alt', evt.target.getAttribute('alt'));
+    popupImageTitle.textContent = evt.target.getAttribute('alt');
 
     openPopup(imagePopup);
   });
 
+  return card;
+}
+
+
+//Функция добавления карточки в начало списка
+function addCard(card) {
   cardsList.prepend(card);
 }
 
 
-//Закрытие popup
+//Обработчик кнопок закрытия popup'ов
 popupCloseBtns.forEach((btn) => {
   btn.addEventListener('click', (evt) => {
-    evt.target.closest('.popup').classList.remove('popup_opened');
+    closePopup(evt.target.closest('.popup'));
   });
 });
 
 
 //Открытие popup'а редактирования профиля
-profileBtn.addEventListener('click', () => openPopup(profilePopup));
+profileBtn.addEventListener('click', () => {
+  openPopup(profilePopup);
+  profileNameInput.value = profileName.textContent;
+  profileDescriptionInput.value = profileDescription.textContent;
+});
+
 //Открытие popup'а создания карточки
 cardAddBtn.addEventListener('click', () => openPopup(cardPopup));
-
-
-//Отображение имени и описания профиля в форме
-profileNameInput.value = profileName.textContent;
-profileDescriptionInput.value = profileDescription.textContent;
 
 
 //Обработка формы редактирование профиля
@@ -138,10 +149,9 @@ cardForm.addEventListener('submit', (evt) => {
   const cardTitle = cardTitleInput.value;
   const cardLink = cardLinkInput.value;
 
-  addCard(cardTitle, cardLink);
+  addCard(createCard(cardTitle, cardLink));
 
-  cardTitleInput.value = '';
-  cardLinkInput.value = '';
+  evt.target.reset();
 
   closePopup(cardPopup);
 });
@@ -149,5 +159,5 @@ cardForm.addEventListener('submit', (evt) => {
 
 //Добавление карточек из массива
 initialCards.forEach((el) => {
-  addCard(el.name, el.link);
+  addCard(createCard(el.name, el.link));
 });
