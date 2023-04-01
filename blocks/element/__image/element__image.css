@@ -5,9 +5,5 @@
   object-fit: cover;
   border-radius: 10px 10px 0 0;
   cursor: pointer;
-  transition: .2s linear;
-}
-
-.element__image:hover {
-  opacity: .6;
+  filter: brightness(.8);
 }

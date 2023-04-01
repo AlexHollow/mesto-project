@@ -1,0 +1,19 @@
+.popup__container_type_image {
+  margin: auto 65px;
+  padding: 0;
+  max-width: 75vw;
+  max-height: 75vh;
+  min-height: 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media screen and (max-width: 560px) {
+
+  .popup__container_type_image {
+    margin: auto 40px;
+    padding: 0;
+  }
+
+}

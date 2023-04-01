@@ -2,6 +2,8 @@
 const profilePopup = document.querySelector('#profilePopup');
 //popup создания карточки
 const cardPopup = document.querySelector('#cardPopup');
+//popup с изображением карточки
+const imagePopup = document.querySelector('#imagePopup');
 //Кнопка открытия popup'а редактирования профиля
 const profileBtn = document.querySelector('.profile__edit-button');
 //Кнопка открытия popup'а создания карточки
@@ -85,6 +87,14 @@ function addCard(title, link) {
 
   card.querySelector('.element__delete-button').addEventListener('click', (evt) => {
     evt.target.closest('.element').remove();
+  });
+
+  card.querySelector('.element__image').addEventListener('click', (evt) => {
+    imagePopup.querySelector('.popup__image').setAttribute('src', evt.target.getAttribute('src'));
+    imagePopup.querySelector('.popup__image').setAttribute('alt', evt.target.getAttribute('alt'));
+    imagePopup.querySelector('.popup__image-title').textContent = evt.target.getAttribute('alt');
+
+    openPopup(imagePopup);
   });
 
   cardsList.prepend(card);

@@ -1,5 +1,5 @@
 .popup {
-  display: none;
+  display: flex;
   justify-content: center;
   position: fixed;
   top: 0;
@@ -7,6 +7,9 @@
   width: 100vw;
   height: 100vh;
   z-index: 20;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .2s, opacity .2s linear;
 }
 
 .popup::before {
