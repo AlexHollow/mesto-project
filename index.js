@@ -74,6 +74,7 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
+
 //Функция закрытия popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -114,9 +115,99 @@ function addCard(card) {
 }
 
 
+//Функция валидации
+function enableValidation() {
+  const formList = Array.from(document.querySelectorAll('.form'));
+
+  formList.forEach((form) => {
+    form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+
+    setEventListeners(form);
+  });
+}
+
+enableValidation();
+
+//Функция добавления обработчика 'input'
+function setEventListeners(form) {
+  const inputList = Array.from(form.querySelectorAll('.form__text'));
+  const button = form.querySelector('.form__button');
+
+  toggleButton(inputList, button);
+
+  inputList.forEach((input) => {
+    input.addEventListener('input', () => {
+      checkValidity(form, input);
+      toggleButton(inputList, button);
+    });
+  });
+}
+
+
+//Функция вывода ошибки на экран
+function showInputError(form, input, errorMessage) {
+  const error = form.querySelector(`.form__error_type_${input.id}`);
+  input.classList.add('form__text_type_error');
+  error.textContent = errorMessage;
+  error.classList.add('form__error_active');
+}
+
+
+//Функция скрытия ошибки
+function hideInputError(form, input) {
+  const error = form.querySelector(`.form__error_type_${input.id}`);
+  input.classList.remove('form__text_type_error');
+  error.textContent = '';
+  error.classList.remove('form__error_active');
+}
+
+
+//Функция вывода или скрытия ошибки валидности input'а
+function checkValidity(form, input) {
+  if (!input.validity.valid) {
+    showInputError(form, input, input.validationMessage);
+  } else {
+    hideInputError(form, input);
+  }
+}
+
+
+//Функция проверки - есть ли хотя бы один невалидный инпут
+function hasInvalidInput(inputList) {
+  return inputList.some((input) => {
+    return !input.validity.valid;
+  });
+}
+
+
+//Функция отключения кнопки, если присутствует хотя бы один невалидный инпут
+function toggleButton(inputList, button) {
+  if (hasInvalidInput(inputList)) {
+    button.classList.add('form__button_disabled');
+  } else {
+    button.classList.remove('form__button_disabled');
+  }
+}
+
+
 //Обработчик кнопок закрытия popup'ов
 popupCloseBtns.forEach((btn) => {
   btn.addEventListener('click', (evt) => {
+    if (evt.target.closest('.popup') === profilePopup) {
+
+      profileForm.querySelectorAll('.form__text').forEach((input) => {
+        input.classList.remove('form__text_type_error');
+      })
+
+      profileForm.querySelectorAll('.form__error').forEach((error) => {
+        error.classList.remove('form__error_active');
+      });
+
+      closePopup(evt.target.closest('.popup'));
+    }
+
     closePopup(evt.target.closest('.popup'));
   });
 });
@@ -125,12 +216,18 @@ popupCloseBtns.forEach((btn) => {
 //Открытие popup'а редактирования профиля
 profileBtn.addEventListener('click', () => {
   openPopup(profilePopup);
+
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
+
+  setEventListeners(profileForm);
 });
 
 //Открытие popup'а создания карточки
-cardAddBtn.addEventListener('click', () => openPopup(cardPopup));
+cardAddBtn.addEventListener('click', () => {
+  openPopup(cardPopup);
+  setEventListeners(cardForm);
+});
 
 
 //Обработка формы редактирование профиля
