@@ -1,3 +1,7 @@
+import {enableValidation, setEventListeners} from './validate.js';
+import {createCard, addCard} from './card.js';
+import {openPopup, closePopup} from './modal.js'
+
 //Nodelist с popup'ами
 const popups = document.querySelectorAll('.popup');
 //popup редактирования профиля
@@ -16,8 +20,6 @@ const profileBtn = document.querySelector('.profile__edit-button');
 const cardAddBtn = document.querySelector('.profile__add-button');
 //Nodelist с кнопками закрытия popup
 const popupCloseBtns = document.querySelectorAll('.popup__close-button');
-//Nodelist с кнопками удаления карточек
-const cardDeleteBtns = document.querySelectorAll('.element__delete-button');
 //Имя профиля
 const profileName = document.querySelector('.profile__name');
 //Описание профиля
@@ -68,128 +70,10 @@ const initialCards = [
   }
 ];
 
+export {cardTemplate, cardsList};
 
-//Функция открытия popup
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-}
-
-
-//Функция закрытия popup
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-}
-
-
-//Функция создания карточки
-function createCard(title, link) {
-  const card = cardTemplate.querySelector('.element').cloneNode(true);
-
-  card.querySelector('.element__title').textContent = title;
-  card.querySelector('.element__image').setAttribute('src', link);
-  card.querySelector('.element__image').setAttribute('alt', title);
-
-  // card.querySelector('.element__like-button').addEventListener('click', (evt) => {
-  //   evt.target.classList.toggle('element__like-button_active');
-  // });
-
-  // card.querySelector('.element__delete-button').addEventListener('click', (evt) => {
-  //   evt.target.closest('.element').remove();
-  // });
-
-  // card.querySelector('.element__image').addEventListener('click', (evt) => {
-  //   popupImage.setAttribute('src', evt.target.getAttribute('src'));
-  //   popupImage.setAttribute('alt', evt.target.getAttribute('alt'));
-  //   popupImageTitle.textContent = evt.target.getAttribute('alt');
-
-  //   openPopup(imagePopup);
-  // });
-
-  return card;
-}
-
-
-//Функция добавления карточки в начало списка
-function addCard(card) {
-  cardsList.prepend(card);
-}
-
-
-//Функция валидации
-function enableValidation() {
-  const formList = Array.from(document.querySelectorAll('.form'));
-
-  formList.forEach((form) => {
-    form.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
-
-    setEventListeners(form);
-  });
-}
-
+//Вызов функции валидации
 enableValidation();
-
-//Функция добавления обработчика 'input'
-function setEventListeners(form) {
-  const inputList = Array.from(form.querySelectorAll('.form__text'));
-  const button = form.querySelector('.form__button');
-
-  toggleButton(inputList, button);
-
-  inputList.forEach((input) => {
-    input.addEventListener('input', () => {
-      checkValidity(form, input);
-      toggleButton(inputList, button);
-    });
-  });
-}
-
-
-//Функция вывода ошибки на экран
-function showInputError(form, input, errorMessage) {
-  const error = form.querySelector(`.form__error_type_${input.id}`);
-  input.classList.add('form__text_type_error');
-  error.textContent = errorMessage;
-  error.classList.add('form__error_active');
-}
-
-
-//Функция скрытия ошибки
-function hideInputError(form, input) {
-  const error = form.querySelector(`.form__error_type_${input.id}`);
-  input.classList.remove('form__text_type_error');
-  error.textContent = '';
-  error.classList.remove('form__error_active');
-}
-
-
-//Функция вывода или скрытия ошибки валидности input'а
-function checkValidity(form, input) {
-  if (!input.validity.valid) {
-    showInputError(form, input, input.validationMessage);
-  } else {
-    hideInputError(form, input);
-  }
-}
-
-
-//Функция проверки - есть ли хотя бы один невалидный инпут
-function hasInvalidInput(inputList) {
-  return inputList.some((input) => {
-    return !input.validity.valid;
-  });
-}
-
-
-//Функция отключения кнопки, если присутствует хотя бы один невалидный инпут
-function toggleButton(inputList, button) {
-  if (hasInvalidInput(inputList)) {
-    button.classList.add('form__button_disabled');
-  } else {
-    button.classList.remove('form__button_disabled');
-  }
-}
 
 
 //Обработчик кнопок закрытия popup'ов
