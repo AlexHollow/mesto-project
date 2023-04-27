@@ -1,6 +1,8 @@
 import {enableValidation, setEventListeners} from './validate.js';
 import {createCard, addCard} from './card.js';
-import {openPopup, closePopup} from './modal.js'
+import {openPopup, closePopup} from './modal.js';
+
+import '../pages/index.css';
 
 //Nodelist с popup'ами
 const popups = document.querySelectorAll('.popup');
