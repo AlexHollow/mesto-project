@@ -48,6 +48,12 @@ function hideInputError(form, input) {
 
 //Функция вывода или скрытия ошибки валидности input'а
 function checkValidity(form, input) {
+  if(input.validity.patternMismatch) {
+    input.setCustomValidity(input.dataset.errorMessage);
+  } else {
+    input.setCustomValidity('');
+  }
+
   if (!input.validity.valid) {
     showInputError(form, input, input.validationMessage);
   } else {
@@ -68,9 +74,23 @@ function hasInvalidInput(inputList) {
 function toggleButton(inputList, button) {
   if (hasInvalidInput(inputList)) {
     button.classList.add('form__button_disabled');
+    button.setAttribute('disabled', 'disabled');
   } else {
     button.classList.remove('form__button_disabled');
+    button.removeAttribute('disabled', 'disabled');
   }
 }
 
-export {enableValidation, setEventListeners};
+//Функция удаления сообщения ошибки валидации
+function deleteErrorMessage(form) {
+
+  form.querySelectorAll('.form__text').forEach((input) => {
+    input.classList.remove('form__text_type_error');
+  })
+
+  form.querySelectorAll('.form__error').forEach((error) => {
+    error.classList.remove('form__error_active');
+  });
+}
+
+export {enableValidation, setEventListeners, deleteErrorMessage};

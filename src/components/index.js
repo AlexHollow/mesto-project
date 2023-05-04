@@ -1,4 +1,4 @@
-import {enableValidation, setEventListeners} from './validate.js';
+import {enableValidation, setEventListeners, deleteErrorMessage} from './validate.js';
 import {createCard, addCard} from './card.js';
 import {openPopup, closePopup} from './modal.js';
 
@@ -83,13 +83,7 @@ popupCloseBtns.forEach((btn) => {
   btn.addEventListener('click', (evt) => {
     if (evt.target.closest('.popup') === profilePopup) {
 
-      profileForm.querySelectorAll('.form__text').forEach((input) => {
-        input.classList.remove('form__text_type_error');
-      })
-
-      profileForm.querySelectorAll('.form__error').forEach((error) => {
-        error.classList.remove('form__error_active');
-      });
+      deleteErrorMessage(profileForm);
 
       closePopup(evt.target.closest('.popup'));
     }
@@ -190,6 +184,13 @@ popups.forEach((el) => {
 document.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
     popups.forEach((el) => {
+      if (el === profilePopup) {
+        
+        deleteErrorMessage(profileForm);
+
+        closePopup(el);
+      }
+
       closePopup(el);
     });
   }
