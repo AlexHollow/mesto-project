@@ -1,6 +1,15 @@
+const classListValidation = {
+  formSelector: '.form',
+  inputSelector: '.form__text',
+  submitButtonSelector: '.form__button',
+  inactiveButtonClass: 'form__button_disabled',
+  inputErrorClass: '.form__error',
+  errorClass: 'form__error_active',
+}
+
 //Функция валидации
 function enableValidation() {
-  const formList = Array.from(document.querySelectorAll('.form'));
+  const formList = Array.from(document.querySelectorAll(classListValidation.formSelector));
 
   formList.forEach((form) => {
     form.addEventListener('submit', (evt) => {
@@ -14,8 +23,8 @@ function enableValidation() {
 
 //Функция добавления обработчика 'input'
 function setEventListeners(form) {
-  const inputList = Array.from(form.querySelectorAll('.form__text'));
-  const button = form.querySelector('.form__button');
+  const inputList = Array.from(form.querySelectorAll(classListValidation.inputSelector));
+  const button = form.querySelector(classListValidation.submitButtonSelector);
 
   toggleButton(inputList, button);
 
@@ -33,7 +42,7 @@ function showInputError(form, input, errorMessage) {
   const error = form.querySelector(`.form__error_type_${input.id}`);
   input.classList.add('form__text_type_error');
   error.textContent = errorMessage;
-  error.classList.add('form__error_active');
+  error.classList.add(classListValidation.errorClass);
 }
 
 
@@ -42,7 +51,7 @@ function hideInputError(form, input) {
   const error = form.querySelector(`.form__error_type_${input.id}`);
   input.classList.remove('form__text_type_error');
   error.textContent = '';
-  error.classList.remove('form__error_active');
+  error.classList.remove(classListValidation.errorClass);
 }
 
 
@@ -73,10 +82,10 @@ function hasInvalidInput(inputList) {
 //Функция отключения кнопки, если присутствует хотя бы один невалидный инпут
 function toggleButton(inputList, button) {
   if (hasInvalidInput(inputList)) {
-    button.classList.add('form__button_disabled');
+    button.classList.add(classListValidation.inactiveButtonClass);
     button.setAttribute('disabled', 'disabled');
   } else {
-    button.classList.remove('form__button_disabled');
+    button.classList.remove(classListValidation.inactiveButtonClass);
     button.removeAttribute('disabled', 'disabled');
   }
 }
@@ -84,12 +93,12 @@ function toggleButton(inputList, button) {
 //Функция удаления сообщения ошибки валидации
 function deleteErrorMessage(form) {
 
-  form.querySelectorAll('.form__text').forEach((input) => {
+  form.querySelectorAll(classListValidation.inputSelector).forEach((input) => {
     input.classList.remove('form__text_type_error');
   })
 
-  form.querySelectorAll('.form__error').forEach((error) => {
-    error.classList.remove('form__error_active');
+  form.querySelectorAll(classListValidation.inputErrorClass).forEach((error) => {
+    error.classList.remove(classListValidation.errorClass);
   });
 }
 
