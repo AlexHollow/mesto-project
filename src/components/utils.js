@@ -38,6 +38,18 @@ const cardTemplate = document.querySelector('#newCard').content;
 const cardsList = document.querySelector('.elements__list');
 
 
+// Объект с селекторами для валидации
+const settings = {
+  formSelector: '.form',
+  inputSelector: '.form__text',
+  submitButtonSelector: '.form__button',
+  inactiveButtonClass: 'form__button_disabled',
+  inputErrorClass: 'form__text_type_error',
+  errorSpanClass: '.form__error',
+  errorClass: 'form__error_active',
+}
+
+
 //Массив с карточками
 const initialCards = [
   {
@@ -69,4 +81,4 @@ const initialCards = [
 
 export {popups, profilePopup, cardPopup, imagePopup, popupImage, popupImageTitle, profileBtn,
   cardAddBtn, popupCloseBtns, profileName, profileDescription, profileNameInput, profileDescriptionInput,
-  cardTitleInput, cardLinkInput, profileForm, cardForm, cardTemplate, cardsList, initialCards}
+  cardTitleInput, cardLinkInput, profileForm, cardForm, cardTemplate, cardsList, initialCards, settings}

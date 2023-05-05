@@ -77,9 +77,9 @@
       <button type="button" class="popup__close-button"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
       <form id="profileForm" name="profile-form" action="#" class="form" novalidate>
-        <input data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" pattern="^[A-Za-zА-Яа-яЁё\s\d\-]+$" id="name" type="text" class="form__text form__text_type_name" name="name" placeholder="Ваше имя" minlength="2" maxlength="40" required>
+        <input data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" pattern="^[A-Za-zА-Яа-яЁё\s\-]+$" id="name" type="text" class="form__text form__text_type_name" name="name" placeholder="Ваше имя" minlength="2" maxlength="40" required>
         <span class="form__error form__error_type_name"></span>
-        <input data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" pattern="^[A-Za-zА-Яа-яЁё\s\d\-]+$" id="description" type="text" class="form__text form__text_type_description" name="description" placeholder="Опишите себя в нескольких словах" minlength="2" maxlength="200" required>
+        <input data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" pattern="^[A-Za-zА-Яа-яЁё\s\-]+$" id="description" type="text" class="form__text form__text_type_description" name="description" placeholder="Опишите себя в нескольких словах" minlength="2" maxlength="200" required>
         <span class="form__error form__error_type_description"></span>
         <input type="submit" value="Сохранить" class="form__button">
       </form>
@@ -90,7 +90,7 @@
       <button type="button" class="popup__close-button"></button>
       <h3 class="popup__title">Новое место</h3>
       <form id="cardForm" name="card-form" action="#" class="form" novalidate>
-        <input data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" pattern="^[A-Za-zА-Яа-яЁё\s\d\-]+$" id="title" type="text" class="form__text form__text_type_name" name="title" placeholder="Название" minlength="2" maxlength="30" required>
+        <input data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" pattern="^[A-Za-zА-Яа-яЁё\s\-]+$" id="title" type="text" class="form__text form__text_type_name" name="title" placeholder="Название" minlength="2" maxlength="30" required>
         <span class="form__error form__error_type_title"></span>
         <input id="reference" type="url" class="form__text form__text_type_description" name="link" placeholder="Ссылка на картинку" required>
         <span class="form__error form__error_type_reference"></span>

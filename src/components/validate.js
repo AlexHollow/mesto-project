@@ -1,62 +1,53 @@
-const classListValidation = {
-  formSelector: '.form',
-  inputSelector: '.form__text',
-  submitButtonSelector: '.form__button',
-  inactiveButtonClass: 'form__button_disabled',
-  inputErrorClass: '.form__error',
-  errorClass: 'form__error_active',
-}
-
 //Функция валидации
-function enableValidation() {
-  const formList = Array.from(document.querySelectorAll(classListValidation.formSelector));
+function enableValidation(settings) {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
 
   formList.forEach((form) => {
     form.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
 
-    setEventListeners(form);
+    setEventListeners(form, settings);
   });
 }
 
 
 //Функция добавления обработчика 'input'
-function setEventListeners(form) {
-  const inputList = Array.from(form.querySelectorAll(classListValidation.inputSelector));
-  const button = form.querySelector(classListValidation.submitButtonSelector);
+function setEventListeners(form, settings) {
+  const inputList = Array.from(form.querySelectorAll(settings.inputSelector));
+  const button = form.querySelector(settings.submitButtonSelector);
 
-  toggleButton(inputList, button);
+  toggleButton(inputList, button, settings);
 
   inputList.forEach((input) => {
     input.addEventListener('input', () => {
-      checkValidity(form, input);
-      toggleButton(inputList, button);
+      checkValidity(form, input, settings);
+      toggleButton(inputList, button, settings);
     });
   });
 }
 
 
 //Функция вывода ошибки на экран
-function showInputError(form, input, errorMessage) {
+function showInputError(form, input, errorMessage, settings) {
   const error = form.querySelector(`.form__error_type_${input.id}`);
-  input.classList.add('form__text_type_error');
+  input.classList.add(settings.inputErrorClass);
   error.textContent = errorMessage;
-  error.classList.add(classListValidation.errorClass);
+  error.classList.add(settings.errorClass);
 }
 
 
 //Функция скрытия ошибки
-function hideInputError(form, input) {
+function hideInputError(form, input, settings) {
   const error = form.querySelector(`.form__error_type_${input.id}`);
-  input.classList.remove('form__text_type_error');
+  input.classList.remove(settings.inputErrorClass);
   error.textContent = '';
-  error.classList.remove(classListValidation.errorClass);
+  error.classList.remove(settings.errorClass);
 }
 
 
 //Функция вывода или скрытия ошибки валидности input'а
-function checkValidity(form, input) {
+function checkValidity(form, input, settings) {
   if(input.validity.patternMismatch) {
     input.setCustomValidity(input.dataset.errorMessage);
   } else {
@@ -64,9 +55,9 @@ function checkValidity(form, input) {
   }
 
   if (!input.validity.valid) {
-    showInputError(form, input, input.validationMessage);
+    showInputError(form, input, input.validationMessage, settings);
   } else {
-    hideInputError(form, input);
+    hideInputError(form, input, settings);
   }
 }
 
@@ -78,28 +69,40 @@ function hasInvalidInput(inputList) {
   });
 }
 
+function activateSubmitButton(button, settings) {
+  button.classList.remove(settings.inactiveButtonClass);
+  button.removeAttribute('disabled');
+}
+
+function disableSubmitButton(button, settings) {
+  button.classList.add(settings.inactiveButtonClass);
+  button.setAttribute('disabled', 'true');
+}
 
 //Функция отключения кнопки, если присутствует хотя бы один невалидный инпут
-function toggleButton(inputList, button) {
+function toggleButton(inputList, button, settings) {
   if (hasInvalidInput(inputList)) {
-    button.classList.add(classListValidation.inactiveButtonClass);
-    button.setAttribute('disabled', 'disabled');
+    disableSubmitButton(button, settings);
+    // button.classList.add(settings.inactiveButtonClass);
+    // button.setAttribute('disabled', 'true');
   } else {
-    button.classList.remove(classListValidation.inactiveButtonClass);
-    button.removeAttribute('disabled', 'disabled');
+    activateSubmitButton(button, settings);
+    // button.classList.remove(settings.inactiveButtonClass);
+    // button.removeAttribute('disabled');
   }
 }
 
-//Функция удаления сообщения ошибки валидации
-function deleteErrorMessage(form) {
 
-  form.querySelectorAll(classListValidation.inputSelector).forEach((input) => {
-    input.classList.remove('form__text_type_error');
+//Функция удаления сообщения ошибки валидации
+function deleteErrorMessage(form, settings) {
+
+  form.querySelectorAll(settings.inputSelector).forEach((input) => {
+    input.classList.remove(settings.inputErrorClass);
   })
 
-  form.querySelectorAll(classListValidation.inputErrorClass).forEach((error) => {
-    error.classList.remove(classListValidation.errorClass);
+  form.querySelectorAll(settings.errorSpanClass).forEach((error) => {
+    error.classList.remove(settings.errorClass);
   });
 }
 
-export {enableValidation, setEventListeners, deleteErrorMessage};
+export {enableValidation, deleteErrorMessage, activateSubmitButton};

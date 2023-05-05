@@ -1,28 +1,21 @@
-import {enableValidation, setEventListeners, deleteErrorMessage} from './validate.js';
+import {enableValidation, deleteErrorMessage, activateSubmitButton} from './validate.js';
 import {createCard, addCard} from './card.js';
 import {openPopup, closePopup} from './modal.js';
 import {popups, profilePopup, cardPopup, imagePopup, popupImage, popupImageTitle, profileBtn,
   cardAddBtn, popupCloseBtns, profileName, profileDescription, profileNameInput, profileDescriptionInput,
-  cardTitleInput, cardLinkInput, profileForm, cardForm, cardTemplate, cardsList, initialCards} from './utils.js';
+  cardTitleInput, cardLinkInput, profileForm, cardForm, cardTemplate, cardsList, initialCards, settings} from './utils.js';
 
 import '../pages/index.css';
 
 export {cardTemplate, cardsList};
 
 //Вызов функции валидации
-enableValidation();
+enableValidation(settings);
 
 
 //Обработчик кнопок закрытия popup'ов
 popupCloseBtns.forEach((btn) => {
   btn.addEventListener('click', (evt) => {
-    if (evt.target.closest('.popup') === profilePopup) {
-
-      deleteErrorMessage(profileForm);
-
-      closePopup(evt.target.closest('.popup'));
-    }
-
     closePopup(evt.target.closest('.popup'));
   });
 });
@@ -32,16 +25,18 @@ popupCloseBtns.forEach((btn) => {
 profileBtn.addEventListener('click', () => {
   openPopup(profilePopup);
 
+  activateSubmitButton(profileForm.querySelector('.form__button'), settings);
+
+  deleteErrorMessage(profileForm, settings);
+
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-
-  setEventListeners(profileForm);
 });
+
 
 //Открытие popup'а создания карточки
 cardAddBtn.addEventListener('click', () => {
   openPopup(cardPopup);
-  setEventListeners(cardForm);
 });
 
 
@@ -112,21 +107,4 @@ popups.forEach((el) => {
       closePopup(evt.target);
     }
   });
-});
-
-
-//Обработчик закрытия попапа на клавишу Escape
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    popups.forEach((el) => {
-      if (el === profilePopup) {
-        
-        deleteErrorMessage(profileForm);
-
-        closePopup(el);
-      }
-
-      closePopup(el);
-    });
-  }
 });
