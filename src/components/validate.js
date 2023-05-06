@@ -105,4 +105,4 @@ function deleteErrorMessage(form, settings) {
   });
 }
 
-export {enableValidation, deleteErrorMessage, activateSubmitButton};
+export {enableValidation, deleteErrorMessage, activateSubmitButton, disableSubmitButton};

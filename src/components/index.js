@@ -1,4 +1,4 @@
-import {enableValidation, deleteErrorMessage, activateSubmitButton} from './validate.js';
+import {enableValidation, deleteErrorMessage, activateSubmitButton, disableSubmitButton} from './validate.js';
 import {createCard, addCard} from './card.js';
 import {openPopup, closePopup} from './modal.js';
 import {popups, profilePopup, cardPopup, imagePopup, popupImage, popupImageTitle, profileBtn,
@@ -37,6 +37,7 @@ profileBtn.addEventListener('click', () => {
 //Открытие popup'а создания карточки
 cardAddBtn.addEventListener('click', () => {
   openPopup(cardPopup);
+  disableSubmitButton(cardForm.querySelector('.form__button'), settings);
 });
 
 
