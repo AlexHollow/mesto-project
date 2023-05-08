@@ -2,6 +2,12 @@
 const popups = document.querySelectorAll('.popup');
 //popup редактирования профиля
 const profilePopup = document.querySelector('#profilePopup');
+//Контейнер с аватаркой
+const profileAvatarContainer = document.querySelector('.profile__avatar-container');
+//Аватарка
+const profileAvatar = document.querySelector('.profile__avatar');
+//popup редактирования аватарки
+const avatarPopup = document.querySelector('#avatarPopup');
 //popup создания карточки
 const cardPopup = document.querySelector('#cardPopup');
 //popup с изображением карточки
@@ -28,10 +34,14 @@ const profileDescriptionInput = profilePopup.querySelector('.form__text_type_des
 const cardTitleInput = cardPopup.querySelector('.form__text_type_name');
 //Инпут с ссылкой на картинку для карточки
 const cardLinkInput = cardPopup.querySelector('.form__text_type_description');
+//Инпут с ссылкой на аватарку
+const avatarLinkInput = avatarPopup.querySelector('#avatarRef');
 //Форма редактирования профиля
 const profileForm = document.querySelector('#profileForm');
 //Форма создания карточки
 const cardForm = document.querySelector('#cardForm');
+//Форма редактирования аватарки
+const avatarForm = document.querySelector('#avatarForm');
 //Темплейт с карточкой
 const cardTemplate = document.querySelector('#newCard').content;
 //Список с карточками
@@ -50,35 +60,6 @@ const settings = {
 }
 
 
-//Массив с карточками
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-
-export {popups, profilePopup, cardPopup, imagePopup, popupImage, popupImageTitle, profileBtn,
+export {popups, profilePopup, profileAvatarContainer, profileAvatar, avatarPopup, cardPopup, imagePopup, popupImage, popupImageTitle, profileBtn,
   cardAddBtn, popupCloseBtns, profileName, profileDescription, profileNameInput, profileDescriptionInput,
-  cardTitleInput, cardLinkInput, profileForm, cardForm, cardTemplate, cardsList, initialCards, settings}
+  cardTitleInput, cardLinkInput, avatarLinkInput, profileForm, cardForm, avatarForm, cardTemplate, cardsList, settings}

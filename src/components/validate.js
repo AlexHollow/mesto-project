@@ -83,12 +83,8 @@ function disableSubmitButton(button, settings) {
 function toggleButton(inputList, button, settings) {
   if (hasInvalidInput(inputList)) {
     disableSubmitButton(button, settings);
-    // button.classList.add(settings.inactiveButtonClass);
-    // button.setAttribute('disabled', 'true');
   } else {
     activateSubmitButton(button, settings);
-    // button.classList.remove(settings.inactiveButtonClass);
-    // button.removeAttribute('disabled');
   }
 }
 

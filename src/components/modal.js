@@ -19,5 +19,13 @@ function closeByEscape(evt) {
   }
 }
 
+//Функция рендера запроса
+function renderRes(isLoading, button) {
+  if (isLoading) {
+    button.value = `${button.value}...`;
+  } else {
+    button.value = button.value.replace('...', '');
+  }
+}
 
-export {openPopup, closePopup};
+export {openPopup, closePopup, renderRes};

@@ -1,4 +1,6 @@
 .element__like-button {
+  align-self: flex-end;
+  margin: 0 0 3px 0;
   padding: 0;
   width: 22px;
   height: 19px;
