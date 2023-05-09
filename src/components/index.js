@@ -41,6 +41,12 @@ profileBtn.addEventListener('click', () => {
 //Открытие popup'а создания карточки
 cardAddBtn.addEventListener('click', () => {
   openPopup(cardPopup);
+
+  cardTitleInput.value = '';
+  cardLinkInput.value = '';
+
+  deleteErrorMessage(cardForm, settings);
+
   disableSubmitButton(cardForm.querySelector('.form__button'), settings);
 });
 
@@ -51,16 +57,17 @@ profileForm.addEventListener('submit', (evt) => {
 
   renderRes(true, evt.submitter);
 
-  profileName.textContent = profileNameInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-
   editProfileInfo(profileNameInput.value, profileDescriptionInput.value)
+    .then(() => {
+      profileName.textContent = profileNameInput.value;
+      profileDescription.textContent = profileDescriptionInput.value;
+
+      closePopup(profilePopup);
+    })
     .catch((error) => {
       console.log(error);
     })
     .finally(() => renderRes(false, evt.submitter));
-
-  closePopup(profilePopup);
 });
 
 
@@ -68,11 +75,11 @@ profileForm.addEventListener('submit', (evt) => {
 profileAvatarContainer.addEventListener('click', () => {
   openPopup(avatarPopup);
 
-  avatarLinkInput.value = profileAvatar.getAttribute('src');
-
-  activateSubmitButton(avatarForm.querySelector('.form__button'), settings);
+  avatarLinkInput.value = '';
 
   deleteErrorMessage(avatarForm, settings);
+
+  disableSubmitButton(avatarForm.querySelector('.form__button'), settings);
 });
 
 
@@ -88,15 +95,15 @@ cardForm.addEventListener('submit', (evt) => {
   postNewCard(cardTitle, cardLink)
     .then((card) => {
       prependCard(card.name, card.link, card.likes, card._id, card.owner._id);
+
+      evt.target.reset();
+
+      closePopup(cardPopup);
     })
     .catch((error) => {
       console.log(error);
     })
-    .finally(() => renderRes(false, evt.submitter));
-  
-  evt.target.reset();
-
-  closePopup(cardPopup);
+    .finally(() => renderRes(false, evt.submitter)); 
 });
 
 
@@ -109,13 +116,13 @@ avatarForm.addEventListener('submit', (evt) => {
   editAvatar(avatarLinkInput.value)
     .then(() => {
       profileAvatar.setAttribute('src', avatarLinkInput.value);
+
+      closePopup(avatarPopup);
     })
     .catch((error) => {
       console.log(error);
     })
     .finally(() => renderRes(false, evt.submitter));
-
-  closePopup(avatarPopup);
 })
 
 
@@ -141,25 +148,41 @@ popups.forEach((popup) => {
 });
 
 
-// Получение информации о пользователе
-getUserInfo()
-  .then((user) => {
+Promise.all([getUserInfo(), getInitialCards()])
+  .then(([user, cards]) => {
     profileName.textContent = user.name;
     profileDescription.textContent = user.about;
     profileAvatar.setAttribute('src', user.avatar);
     currentUserId = user._id;
 
-    //Получение карточек с сервера
-    getInitialCards()
-      .then((cards) => {
-        cards.forEach((card) => {
-          cardsList.append(createCard(card.name, card.link, card.likes, card._id, card.owner._id));
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    cards.forEach((card) => {
+      cardsList.append(createCard(card.name, card.link, card.likes, card._id, card.owner._id));
+    });
   })
   .catch((error) => {
     console.log(error);
   });
+
+  
+// Получение информации о пользователе
+// getUserInfo()
+//   .then((user) => {
+//     profileName.textContent = user.name;
+//     profileDescription.textContent = user.about;
+//     profileAvatar.setAttribute('src', user.avatar);
+//     currentUserId = user._id;
+
+//     //Получение карточек с сервера
+//     getInitialCards()
+//       .then((cards) => {
+//         cards.forEach((card) => {
+//           cardsList.append(createCard(card.name, card.link, card.likes, card._id, card.owner._id));
+//         });
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
