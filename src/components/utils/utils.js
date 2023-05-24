@@ -49,7 +49,7 @@ const cardsList = document.querySelector('.elements__list');
 
 
 // Объект с селекторами для валидации
-const settings = {
+const validationSettings = {
   formSelector: '.form',
   inputSelector: '.form__text',
   submitButtonSelector: '.form__button',
@@ -60,6 +60,15 @@ const settings = {
 }
 
 
-export {popups, profilePopup, profileAvatarContainer, profileAvatar, avatarPopup, cardPopup, imagePopup, popupImage, popupImageTitle, profileBtn,
-  cardAddBtn, popupCloseBtns, profileName, profileDescription, profileNameInput, profileDescriptionInput,
-  cardTitleInput, cardLinkInput, avatarLinkInput, profileForm, cardForm, avatarForm, cardTemplate, cardsList, settings}
+const configApi = {
+  link: 'https://nomoreparties.co/v1/plus-cohort-23',
+  headers: {
+    authorization: '0020037f-5ec5-482e-b06e-c2ac55bfd33d',
+    'Content-Type': 'application/json',
+  }
+}
+
+export { popups, profilePopup, profileAvatarContainer, profileAvatar, avatarPopup, cardPopup,
+  imagePopup, popupImage, popupImageTitle, profileBtn, cardAddBtn, popupCloseBtns, profileName,
+  profileDescription, profileNameInput, profileDescriptionInput, cardTitleInput, cardLinkInput,
+  avatarLinkInput, profileForm, cardForm, avatarForm, cardTemplate, cardsList, validationSettings, configApi }
