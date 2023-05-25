@@ -1,4 +1,13 @@
 .form__error_type_title {
-  margin: 0 0 13px 0;
-  min-height: 15px;
+  margin: 0 0 7px 0;
+  min-height: 30px;
+}
+
+@media screen and (max-width: 560px) {
+
+  .form__error_type_title {
+    margin: 0 0 5px 0;
+    min-height: 45px;
+  }
+
 }
