@@ -25,3 +25,7 @@
   z-index: 25;
   cursor: pointer;
 }
+
+[id=imagePopup].popup::before{
+  opacity: .9;
+}

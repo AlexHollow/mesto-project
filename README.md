@@ -15,3 +15,5 @@
 - Работа с формами и карточками реализована на JavaScript.
 
 ## GitHub Pages https://alexhollow.github.io/mesto-project/
+
+## GitHub Collaborator https://github.com/Murad088
